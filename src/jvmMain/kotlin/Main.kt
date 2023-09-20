@@ -22,25 +22,30 @@ import kotlinx.coroutines.launch
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication, state = WindowState(
-            size = DpSize(300.dp, 300.dp),
+            size = DpSize(600.dp, 600.dp),
             position = WindowPosition(Alignment.Center)
         )
     ) {
-        val scope = rememberCoroutineScope()
         var progress by remember { mutableStateOf(0) }
-        scope.launch {
+        LaunchedEffect(progress) {
             flow {
-                if (progress <= 100){
+                if (progress <= 100) {
                     delay(100)
                     emit(2)
-                }else{
+                } else {
                     progress = 0
                 }
-            }.collect{
+            }.collect {
                 progress += it
             }
         }
-
+        Column(
+            modifier = Modifier.fillMaxSize().background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RollingArc(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
+            RollingLine(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
+        }
 
     }
 }
