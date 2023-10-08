@@ -43,8 +43,11 @@ fun main() = application {
             modifier = Modifier.fillMaxSize().background(Color.Black),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RollingArc(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
-            RollingLine(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
+            Row(modifier = Modifier.fillMaxWidth().height(300.dp)){
+                RollingArc(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
+                RollingLine(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
+            }
+            NeonLamp(modifier = Modifier.width(300.dp).height(300.dp), progress = progress)
         }
 
     }
